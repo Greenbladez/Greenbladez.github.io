@@ -1,0 +1,301 @@
+:root {
+    --heading: 'Cinzel', serif;
+    --content-width: 1126px;
+    --side-overlay: transparent;
+}
+
+.mobile-fixed-bg {
+  /* Fix the div to the viewport */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* Use 100vh to ensure it covers the whole screen */
+  height: 100vh;
+  
+  /* Set your image here */
+  background-image: url('/imgs/cover.jpg');
+  background-position: center;
+  background-size: cover;
+  
+  /* Push it behind everything else */
+  z-index: -1;
+  
+}
+
+.site-root {
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* center the whole site horizontally */
+    position: relative;
+    z-index: 1;
+}
+
+/* Put the background image on the <body> so it spans the full viewport and stays fixed */
+html, body {
+    height: 100%;
+}
+
+/* Use a fixed ::before pseudo-element for the background so it stays static on mobile browsers */
+
+/* darken the left/right margins while keeping the center content clear */
+.site-root::after {
+    /* centered translucent overlay so content area is readable while margins remain transparent
+       Use min() so the overlay never overflows the viewport and stays centered symmetrically */
+    content: "";
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    bottom: 0;
+    width: min(var(--content-width), 100%);
+    max-width: 100%;
+    pointer-events: none;
+    z-index: 0; /* sits above the background image but below content */
+    background: linear-gradient(rgba(255,255,255,0.65), rgba(255,255,255,0.18));
+}
+
+/* ensure content sits above the side-overlay */
+.site-root > * {
+    position: relative;
+    z-index: 1;
+}
+
+.site-header {
+    padding: 28px 20px;
+}
+
+.site-header .tagline {
+    color: var(--text);
+    opacity: 1.0;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.site-main {
+    flex: 1;
+    padding: 24px 20px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    max-width: 100%;
+    margin: 0 auto;
+    align-items: center;
+    /* center each section block */
+}
+
+section {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    text-align: center;
+    /* center text inside sections */
+    max-width: 900px;
+    /* keep sections narrow and centered */
+    width: 80%;
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    @media (max-width: 720px) {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+section:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.book-showcase .book-inner {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    /* center cover + info horizontally */
+}
+
+.book-showcase .book-cover {
+    display: flex;
+    justify-content: center;
+}
+
+.book-showcase .book-themes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-showcase .themes {
+    margin: 8px 0 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.book-showcase .themes li {
+    background: rgba(0, 0, 0, 0.04);
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 6px 0;
+}
+
+.book-cover .cover-placeholder,
+.author-photo .photo-placeholder {
+    width: 160px;
+
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-radius: 6px;
+}
+
+.book-info h2,
+.author-info h2,
+.action-detail h2,
+.links-list h2 {
+    color: var(--text-h);
+    margin-bottom: 8px;
+}
+
+.action-detail p {
+    text-align: justify;
+    /* justify the action detail text for better readability */
+}
+.action-detail p.special {
+    font-style: italic;
+    text-align: center;
+    margin-top: 16px;
+    margin-bottom: 15px;
+}
+
+
+.themes {
+    margin: 8px 0 0 0;
+    padding-left: 1rem;
+}
+
+.author-bio .bio-inner {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+    /* center author photo + info */
+}
+
+.links-list ul {
+    list-style: disc;
+    padding-left: 1.2rem;
+    display: inline-block;
+    /* keep the list centered but items left-aligned */
+    text-align: left;
+}
+
+.links-list a {
+    color: var(--text-h);
+    text-decoration: underline;
+}
+
+.site-footer {
+    width: 100%;
+    background-color: var(--accent);
+    opacity: 0.8;
+}
+
+.footer-inner {
+    width: var(--content-width);
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    /* center footer content */
+    align-items: center;
+    gap: 24px;
+    flex-direction: column;
+}
+
+/* Styling for the links section */
+.links-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.links {
+    flex: 1;
+    width: 50%
+}
+
+.image-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: 100px;
+    border-radius: 100%;
+}
+
+/* Styling for the links buttons */
+.links-list .links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.links-list .links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    color: #000;
+    font-size: 24px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.links-list .links a:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.links-list .links a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+@media (max-width: 720px) {
+    .book-showcase .book-inner,
+    .author-bio .bio-inner {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .links-list .links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .links-list .links a {
+        width: 60px;
+        height: 60px;
+    }
+
+    .links-list .links a img {
+        width: 80%;
+        height: 80%;
+    }
+}
